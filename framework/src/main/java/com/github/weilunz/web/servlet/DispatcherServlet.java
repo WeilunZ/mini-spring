@@ -1,7 +1,11 @@
 package com.github.weilunz.web.servlet;
 
+import com.github.weilunz.web.handler.HandlerManager;
+import com.github.weilunz.web.handler.MappingHandler;
+
 import javax.servlet.*;
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 
 /**
  * @program: mini-spring
@@ -9,7 +13,7 @@ import java.io.IOException;
  * @author: wl.zhou
  * @create: 2020-04-11 16:17
  **/
-public class TestServlet implements Servlet {
+public class DispatcherServlet implements Servlet {
     @Override
     public void init(ServletConfig config) throws ServletException {
 
@@ -22,7 +26,21 @@ public class TestServlet implements Servlet {
 
     @Override
     public void service(ServletRequest req, ServletResponse res) throws ServletException, IOException {
-        res.getWriter().println("test");
+        for (MappingHandler mappingHandler : HandlerManager.mappingHandlerList){
+            try {
+                if (mappingHandler.handle(req, res)){
+                    return;
+                }
+            } catch (NoSuchMethodException e) {
+                e.printStackTrace();
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            } catch (InvocationTargetException e) {
+                e.printStackTrace();
+            } catch (InstantiationException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     @Override

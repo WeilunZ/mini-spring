@@ -4,10 +4,14 @@
 /build
 /buildSrc/build
 /buildSrc/subprojects/*/build
-/subprojects/*/build
-/subprojects/docs/src/samples/**/build
-/subprojects/docs/src/snippets/**/build
-/subprojects/internal-android-performance-testing/build-android-libs
+/framework/build
+/framework/docs/src/samples/**/build
+/framework/docs/src/snippets/**/build
+/framework/internal-android-performance-testing/build-android-libs
+/test/build
+/test/docs/src/samples/**/build
+/test/docs/src/snippets/**/build
+/test/internal-android-performance-testing/build-android-libs
 
 # IDEA
 # ----
